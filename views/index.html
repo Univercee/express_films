@@ -4,15 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 </head>
 <body>
-    <div>
-        <img style="object-fit: contain; width: 200px; height: 300px;" src="<%= image %>" alt="">
+    <button onclick="getMovie()">Find movie</button>
+    <div id="card" >
+        <img id="image" style="object-fit: contain; width: 200px; height: 300px;" src="" alt="">
+        <p id="title"></p>
+        <p id="year"></p>
     </div>
-    <p><%= title %></p>
-    <p><%= year %></p>
 </body>
 </html>
 <script>
-    
+    const imageElem = document.getElementById('image')
+    const titleElem = document.getElementById('title')
+    const yearElem = document.getElementById('year')
+    const cardElem = document.getElementById('card')
+    let data = {
+        image: '',
+        title: '',
+        year: '?'
+    }
+
+    async function loadImage(src, el){
+        return new Promise((resolve, reject) => {
+            el.onload = () => resolve(el)
+            el.onerror = () => reject()
+            el.src = src
+        })
+    }
+
+    function getMovie(){
+        axios.get('https://moviesdatabase.p.rapidapi.com/titles/random',
+        {
+            headers:{
+            'X-RapidAPI-Key': '37b339b22bmshb189ca5abb62251p1471bfjsn757a1460df69',
+            'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
+            'Content-Type': 'application/json'
+            },
+            params:{
+            list: "most_pop_movies",
+            limit: 1
+            }
+        }).then(async function (response){
+            let movie = response.data.results[0]
+            data.image = movie.primaryImage.url,
+            data.title = movie.titleText.text,
+            data.year = movie.releaseYear.year ? movie.releaseYear.year : '?'
+            await loadImage(data.image, imageElem)
+            titleElem.innerHTML = data.title
+            yearElem.innerHTML = data.year
+        })
+    }
+    getMovie()
 </script>
