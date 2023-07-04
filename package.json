@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Univercee/express_films/issues"
   },
-  "homepage": "https://github.com/Univercee/express_films#readme"
+  "homepage": "https://github.com/Univercee/express_films#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
