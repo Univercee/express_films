@@ -31,11 +31,7 @@
     const titleWrapperElem = document.getElementById('titleWrapper')
     const cardElem = document.getElementById('card')
     const buttonElem = document.getElementById('button')
-    let data = {
-        image: '',
-        title: '',
-        year: '?'
-    }
+
     button.addEventListener('click', getMovie)
     async function loadImage(src, el){
         return new Promise((resolve, reject) => {
@@ -73,27 +69,15 @@
 
     function getMovie(){
         loading()
-        axios.get('https://moviesdatabase.p.rapidapi.com/titles/random',
-        {
-            headers:{
-            'X-RapidAPI-Key': '37b339b22bmshb189ca5abb62251p1471bfjsn757a1460df69',
-            'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
-            'Content-Type': 'application/json'
-            },
-            params:{
-            list: "most_pop_movies",
-            limit: 1
-            }
-        }).then(async function (response){
-            let movie = response.data.results[0]
-            data.image = movie.primaryImage.url,
-            data.title = movie.originalTitleText.text,
-            data.year = movie.releaseYear ? movie.releaseYear.year : ''
-            await loadImage(data.image, imageElem)
-            titleElem.innerHTML = [data.title, data.year].filter(el => {return el}).join(', ')
+        axios.get('/movie')
+        .then(async function (response){
+            let image = response.data.image
+            let title = response.data.title
+            await loadImage(image, imageElem)
+            titleElem.innerHTML = title
         })
         .catch(err => {
-            getMovie()
+            //getMovie()
         })
     }
     getMovie()

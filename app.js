@@ -27,7 +27,7 @@ app.use(
     directives: {
       "default-src": ["'self'"],
       "script-src": ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"],
-      "connect-src": ["https://moviesdatabase.p.rapidapi.com"],
+      "connect-src": ["'self'", "https://moviesdatabase.p.rapidapi.com"],
       "img-src": ["*"]
     },
   })
