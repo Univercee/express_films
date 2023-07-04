@@ -1,0 +1,23 @@
+{
+  "name": "express_films",
+  "version": "1.0.0",
+  "description": "Serach films using API and show it to users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Univercee/express_films.git"
+  },
+  "keywords": [
+    "express",
+    "learning"
+  ],
+  "author": "Aleksandr Ostromogilskii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Univercee/express_films/issues"
+  },
+  "homepage": "https://github.com/Univercee/express_films#readme"
+}
