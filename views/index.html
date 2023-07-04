@@ -33,11 +33,10 @@
     const buttonElem = document.getElementById('button')
 
     button.addEventListener('click', getMovie)
-    async function loadImage(src, el){
+    function loadImage(src, el){
         return new Promise((resolve, reject) => {
             el.onload = () => {
-                onLoad()
-                resolve(el)
+                resolve()
             }
             el.onerror = () => reject()
             el.src = src
@@ -70,13 +69,18 @@
     function getMovie(){
         loading()
         axios.get('/movie')
-        .then(async function (response){
+        .then(function (response){
             let image = response.data.image
             let title = response.data.title
-            await loadImage(image, imageElem)
+            loadImage(image, imageElem)
+            .catch(()=>{
+                imageElem.src = './images/noimage.png'
+            })
+            onLoad()
             titleElem.innerHTML = title
         })
         .catch(err => {
+            console.log(err);
             //getMovie()
         })
     }
