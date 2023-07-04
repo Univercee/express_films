@@ -87,7 +87,7 @@
         }).then(async function (response){
             let movie = response.data.results[0]
             data.image = movie.primaryImage.url,
-            data.title = movie.titleText.text,
+            data.title = movie.originalTitleText.text,
             data.year = movie.releaseYear ? movie.releaseYear.year : ''
             await loadImage(data.image, imageElem)
             titleElem.innerHTML = [data.title, data.year].filter(el => {return el}).join(', ')
