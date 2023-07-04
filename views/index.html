@@ -7,18 +7,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 </head>
 <body>
-    <button id="button">Find movie</button>
-    <div id="card" >
-        <img id="image" style="object-fit: contain; width: 200px; height: 300px;" src="" alt="">
-        <p id="title"></p>
-        <p id="year"></p>
+    <div class="wrapper">
+        <button id="button" class="button">
+            <p class="button__text">Find movie</p>
+        </button>
+        <div id="card" class="card">
+            <div id="imageWrapper" class="card__image">
+                <img id="image">
+            </div>
+            <div class="card__body">
+                <div id="titleWrapper" class="card__title">
+                    <p id="title"></p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
 <script>
     const imageElem = document.getElementById('image')
     const titleElem = document.getElementById('title')
-    const yearElem = document.getElementById('year')
+    const imageWrapperElem = document.getElementById('imageWrapper')
+    const titleWrapperElem = document.getElementById('titleWrapper')
     const cardElem = document.getElementById('card')
     const buttonElem = document.getElementById('button')
     let data = {
@@ -29,13 +39,40 @@
     button.addEventListener('click', getMovie)
     async function loadImage(src, el){
         return new Promise((resolve, reject) => {
-            el.onload = () => resolve(el)
+            el.onload = () => {
+                onLoad()
+                resolve(el)
+            }
             el.onerror = () => reject()
             el.src = src
         })
     }
+    buttonElem.addEventListener('animationend', (e)=>{
+        if(e.animationName == 'transfusionIn'){
+            buttonElem.style.background = "#eee"
+        }
+    })
+    buttonElem.addEventListener('animationstart', (e)=>{
+        if(e.animationName == 'transfusionOut'){
+            buttonElem.style.background = ""
+        }
+    })
+
+    function loading(){
+        imageElem.src = ''
+        imageElem.style.visibility = 'hidden'
+        titleElem.innerHTML = ''
+        imageWrapperElem.classList.add('skeleton')
+        titleWrapperElem.classList.add('skeleton')
+    }
+    function onLoad(){
+        imageElem.style.visibility = 'visible'
+        imageWrapperElem.classList.remove('skeleton')
+        titleWrapperElem.classList.remove('skeleton')
+    }
 
     function getMovie(){
+        loading()
         axios.get('https://moviesdatabase.p.rapidapi.com/titles/random',
         {
             headers:{
@@ -51,11 +88,130 @@
             let movie = response.data.results[0]
             data.image = movie.primaryImage.url,
             data.title = movie.titleText.text,
-            data.year = movie.releaseYear.year ? movie.releaseYear.year : '?'
+            data.year = movie.releaseYear ? movie.releaseYear.year : ''
             await loadImage(data.image, imageElem)
-            titleElem.innerHTML = data.title
-            yearElem.innerHTML = data.year
+            titleElem.innerHTML = [data.title, data.year].filter(el => {return el}).join(', ')
+        })
+        .catch(err => {
+            getMovie()
         })
     }
     getMovie()
 </script>
+<style>
+    :root {
+        --animation-duration: .8s;
+        --color-dark: #2f2f2f;
+        --color-light: #eee;
+    }
+    *{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    p {
+        padding: 0;
+        margin: 0;
+    }
+    .wrapper {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        
+        justify-content: center;
+        align-items: center;
+    }
+    .button {
+        margin-bottom: 40px;
+        padding: 30px 40px;
+        font-size: 1.3em;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background-image: linear-gradient(to right, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-light) 50%, var(--color-light) 100%);
+        background-position-x: 0%;
+        background-size: 200% 100%;
+        animation: transfusionOut var(--animation-duration) ease;
+        animation-fill-mode: forwards;
+    }
+    .button__text{
+        background: linear-gradient(to right, var(--color-light) 0%, var(--color-light) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
+        background-size: 200% 100%;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        animation: transfusionOut var(--animation-duration) ease;
+        animation-fill-mode: forwards;
+    }
+    .button:hover{
+        background-blend-mode: darken;
+        animation: transfusionIn var(--animation-duration) ease;
+        animation-fill-mode: forwards;
+    }
+    .button:hover .button__text {
+        animation: transfusionIn var(--animation-duration) ease;
+        animation-fill-mode: forwards;
+    }
+    .card {
+        display: flex;
+        width: max-content;
+        display: flex;
+        flex-direction: column;
+    }
+    .card *, .button {
+        border-radius: 1em;
+        transition: content 0.5s;
+    }
+    .card__body {
+        padding: 5px;
+        display: flex;
+    }
+    .card__title{
+        text-align: center;
+        min-width: 100%;
+        margin-top: 10px;
+        height: 1.5em;
+        font-weight: 500;
+        font-size: 1.5em;
+    }
+    .card__image {
+        display: flex;
+        justify-content: center;
+    }
+    .card__image img{
+        object-fit: cover;
+        width: 300px;
+        height: 450px;
+    }
+    .skeleton {
+        background-position: 0% 100%;
+        background-size: 200% 200%;
+        background-image: linear-gradient(to right, hsl(200, 20%, 95%) 0%, hsl(200, 20%, 95%) 30%, hsl(200, 20%, 90%) 50%, hsl(200, 20%, 95%) 70%, hsl(200, 20%, 95%) 100%);
+        animation: skeleton-loading 2s ease infinite;
+    }
+
+
+    @keyframes skeleton-loading {
+        0%{
+            background-position-x: 150%;
+        }
+        100% {
+            background-position: -50%;
+        }
+    }
+    @keyframes transfusionIn {
+        from { 
+            background-position-x: 0%;
+        }
+        to { 
+            background-position-x: -100%;
+        }
+    }
+
+    @keyframes transfusionOut {
+        from { 
+            background-position-x: -100%;
+        }
+        to { 
+            background-position-x: 0%;
+        }
+    }
+</style>
