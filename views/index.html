@@ -6,6 +6,7 @@
     <meta name="description" content="Don't know which movie to watch? Just click the button to find the perfect one!">
     <meta name="keywords" content="movies, random, find">
     <meta name="Author" content="Ostromogilskii Aleksandr">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Find random movie</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 </head>
@@ -90,25 +91,6 @@
     getMovie()
 </script>
 <style>
-    @media(hover:hover) and (pointer: fine){
-        .button:hover{
-            background-blend-mode: darken;
-            animation: transfusionIn var(--animation-duration) ease;
-            animation-fill-mode: forwards;
-        }
-        .button:hover .button__text {
-            animation: transfusionIn var(--animation-duration) ease;
-            animation-fill-mode: forwards;
-        }
-    }
-    :root {
-        --animation-duration: .8s;
-        --color-dark: #2f2f2f;
-        --color-light: #eee;
-    }
-    *{
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
     p {
         padding: 0;
         margin: 0;
@@ -121,37 +103,11 @@
         justify-content: center;
         align-items: center;
     }
-    .button {
-        margin-bottom: 2.5em;
-        padding: 1.2em 3em;
-        font-size: 1.5em;
-        font-weight: 500;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        background-image: linear-gradient(to right, var(--color-dark) 0%, var(--color-dark) 50%, var(--color-light) 50%, var(--color-light) 100%);
-        background-position-x: 0%;
-        background-size: 200% 100%;
-        animation: transfusionOut var(--animation-duration) ease;
-        animation-fill-mode: forwards;
-    }
-    .button__text{
-        background: linear-gradient(to right, var(--color-light) 0%, var(--color-light) 50%, var(--color-dark) 50%, var(--color-dark) 100%);
-        background-size: 200% 100%;
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        animation: transfusionOut var(--animation-duration) ease;
-        animation-fill-mode: forwards;
-    }
     .card {
         display: flex;
         width: max-content;
         display: flex;
         flex-direction: column;
-    }
-    .card *, .button {
-        border-radius: 1em;
-        transition: content 0.5s;
     }
     .card__body {
         padding: 5px;
@@ -189,23 +145,6 @@
         }
         100% {
             background-position: -50%;
-        }
-    }
-    @keyframes transfusionIn {
-        from { 
-            background-position-x: 0%;
-        }
-        to { 
-            background-position-x: -100%;
-        }
-    }
-
-    @keyframes transfusionOut {
-        from { 
-            background-position-x: -100%;
-        }
-        to { 
-            background-position-x: 0%;
         }
     }
 </style>

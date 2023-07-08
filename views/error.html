@@ -2,10 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Don't know which movie to watch? Just click the button to find the perfect one!">
+    <meta name="keywords" content="movies, random, not found">
+    <meta name="Author" content="Ostromogilskii Aleksandr">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Document</title>
 </head>
 <body>
-    <%= error %>
+    <div class="wrapper">
+        <p>Oops, page not found</p>
+        <div class="button" id="button">
+            <a class="button__text" href="./">To main page</a>
+        </div>
+        <img src="/images/error404.png" alt="">
+        <a class="author" href="http://www.freepik.com">Designed by Bamdewanto / Freepik</a>
+    </div>
 </body>
 </html>
+
+<script>
+    const buttonElem = document.getElementById('button')
+    buttonElem.addEventListener('animationend', (e)=>{
+        if(e.animationName == 'transfusionIn'){
+            buttonElem.style.background = "#eee"
+        }
+    })
+    buttonElem.addEventListener('animationstart', (e)=>{
+        if(e.animationName == 'transfusionOut'){
+            buttonElem.style.background = ""
+        }
+    })
+</script>
+<style>
+
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10em;
+    }
+    img {
+        width: 15em;
+    }
+    a {
+        text-decoration: none;
+    }
+    .author {
+        font-size: 8px;
+    }
+    .main-link{
+        margin-bottom: 5em;
+    }
+    .button {
+        padding: 1em 2em;
+    }
+
+    
+</style>

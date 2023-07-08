@@ -32,4 +32,8 @@ router.get('/movie', function(req, res, next) {
     })
 });
 
+router.get('*', function(req, res){
+  res.render('error')
+})
+
 module.exports = router;
