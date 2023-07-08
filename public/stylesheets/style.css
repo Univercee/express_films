@@ -45,6 +45,7 @@ a {
     background-size: 200% 100%;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
+    background-clip: text;
     animation: transfusionOut var(--animation-duration) ease;
     animation-fill-mode: forwards;
 }
