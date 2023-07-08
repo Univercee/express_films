@@ -8,6 +8,7 @@ var compression = require('compression')
 require('dotenv').config()
 
 var indexRouter = require('./routes/index');
+const apiRouter = require('./routes/api')
 
 var app = express();
 
@@ -33,7 +34,9 @@ app.use(
   })
 );
 
+app.use('/api', apiRouter)
 app.use('/', indexRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
