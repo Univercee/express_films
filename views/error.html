@@ -12,11 +12,13 @@
 <body>
     <div class="wrapper">
         <p>Oops, page not found</p>
-        <div class="button" id="button">
-            <a class="button__text" href="/">To main page</a>
+        <a id="button" class="button" href="/">
+            <p class="button__text">To main page</p>
+        </a>
+        <div class="license-wrapper">
+            <img src="/images/error404.png" alt="">
+            <a class="img-license" href="http://www.freepik.com">Designed by Bamdewanto / Freepik</a>
         </div>
-        <img src="/images/error404.png" alt="">
-        <a class="img-license" href="http://www.freepik.com">Designed by Bamdewanto / Freepik</a>
     </div>
 </body>
 </html>
@@ -35,13 +37,19 @@
     })
 </script>
 <style>
-
     .wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         margin-top: 10em;
+        gap: 1em;
+    }
+    .license-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     img {
         width: 15em;
