@@ -17,7 +17,13 @@
 *{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+a {
+    text-decoration: none;
+}
+.img-license {
+    font-size: 8px;
+    color: var(--color-dark);
+}
 .button {
     border-radius: 1em;
     transition: content 0.5s;

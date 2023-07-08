@@ -18,6 +18,7 @@
         <div id="card" class="card">
             <div id="imageWrapper" class="card__image">
                 <img id="image">
+                <a id="img_license" style="visibility: hidden;" class="img-license" href="https://www.flaticon.com/free-icons/no-camera" title="no camera icons">No camera icons created by Those Icons - Flaticon</a>
             </div>
             <div class="card__body">
                 <div id="titleWrapper" class="card__title">
@@ -35,6 +36,7 @@
     const titleWrapperElem = document.getElementById('titleWrapper')
     const cardElem = document.getElementById('card')
     const buttonElem = document.getElementById('button')
+    const imgLicense = document.getElementById('img_license')
 
     button.addEventListener('click', getMovie)
     function loadImage(src, el){
@@ -74,10 +76,12 @@
         loading()
         axios.get('/movie')
         .then(function (response){
+            imgLicense.style.visibility = 'hidden'
             let image = response.data.image
             let title = response.data.title
             loadImage(image, imageElem)
             .catch(()=>{
+                imgLicense.style.visibility = 'visible'
                 imageElem.src = './images/noimage.png'
             })
             onLoad()
@@ -124,10 +128,13 @@
     }
     .card__image {
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         justify-content: center;
     }
     .card__image img{
-        object-fit: cover;
+        object-fit: contain;
         width: 300px;
         height: 450px;
     }
