@@ -17,8 +17,8 @@ router.get('/movie', function(req, res, next) {
     }).then(async function (response){
       
         let movie = response.data.results[0]
-        let image = movie.primaryImage.url
-        let title = movie.originalTitleText.text
+        let image = movie.primaryImage ? movie.primaryImage.url : ''
+        let title = movie.originalTitleText ? movie.originalTitleText.text : ''
         let year = movie.releaseYear ? movie.releaseYear.year : ''
         title = [title, year].filter(el => {return el}).join(', ')
         res.json({image: image, title: title})
