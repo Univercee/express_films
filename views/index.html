@@ -74,9 +74,9 @@
 
     function getMovie(){
         loading()
+        imgLicense.style.visibility = 'hidden'
         axios.get('/api/movie')
         .then(function (response){
-            imgLicense.style.visibility = 'hidden'
             let image = response.data.image
             let title = response.data.title
             loadImage(image, imageElem)
@@ -84,8 +84,10 @@
                 imgLicense.style.visibility = 'visible'
                 imageElem.src = './images/noimage.png'
             })
-            onLoad()
-            titleElem.innerHTML = title
+            .finally(()=>{
+                onLoad()
+                titleElem.innerHTML = title
+            })
         })
         .catch(err => {
             console.log(err);
