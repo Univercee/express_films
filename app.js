@@ -27,8 +27,8 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       "default-src": ["'self'"],
-      "script-src": ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js", "https://www.googletagmanager.com"],
-      "connect-src": ["'self'", "https://moviesdatabase.p.rapidapi.com", "https://www.google-analytics.com"],
+      "script-src": ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js", "https://www.googletagmanager.com", "https://mc.yandex.ru/metrika/tag.js"],
+      "connect-src": ["'self'", "https://moviesdatabase.p.rapidapi.com", "https://www.google-analytics.com", "https://mc.yandex.ru"],
       "img-src": ["*"]
     },
   })
