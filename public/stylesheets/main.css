@@ -2,11 +2,10 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin: 0;
 }
