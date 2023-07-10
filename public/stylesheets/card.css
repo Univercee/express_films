@@ -1,0 +1,34 @@
+.card {
+    display: flex;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+}
+.card * {
+    border-radius: 1em;
+}
+.card__body {
+    padding: 5px;
+    display: flex;
+}
+.card__title{
+    text-align: center;
+    min-width: 100%;
+    margin-top: 10px;
+    min-height: 1.5em;
+    font-weight: 500;
+    font-size: 1.5em;
+    max-width: min-content;
+}
+.card__image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
+}
+.card__image img{
+    object-fit: contain;
+    width: 200px;
+    height: 300px;
+}
