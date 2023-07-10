@@ -19,7 +19,7 @@
   gtag('config', 'G-YJSPXQEBC8');
 </script>
 <body>
-    <div class="wrapper">
+    <main>
         <p>Oops, page not found</p>
         <a id="button" class="button" href="/">
             <p class="button__text">To main page</p>
@@ -34,7 +34,11 @@
             </div>
             <a class="img-license" class="img-license" href="https://www.flaticon.com/free-icons/no-camera" title="no camera icons">No camera icons created by Those Icons - Flaticon</a>
         </div>
-    </div>
+    </main>
+    <footer>
+        <img src="./images/github.svg"></img>
+        <img src="./images/linkedin.svg"></img>
+    </footer>
 </body>
 </html>
 
@@ -52,13 +56,13 @@
     })
 </script>
 <style>
-    .wrapper {
+    main {
+        gap: 3em;
+        flex-grow: 1;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-        margin-top: 10em;
-        gap: 1em;
     }
     .license-wrapper {
         display: flex;

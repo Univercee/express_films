@@ -12,6 +12,7 @@
     <title>Find random movie</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 </head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJSPXQEBC8"></script>
 <script>
@@ -21,6 +22,7 @@
 
   gtag('config', 'G-YJSPXQEBC8');
 </script>
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -37,8 +39,9 @@
  </script>
  <noscript><div><img src="https://mc.yandex.ru/watch/94254424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
  <!-- /Yandex.Metrika counter -->
+
 <body>
-    <div class="wrapper">
+    <main>
         <button id="button" class="button">
             <p class="button__text">Another one?</p>
         </button>
@@ -53,9 +56,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+    <footer>
+        <a href="https://github.com/Univercee/randomovie"><img src="./images/github.svg"></img></a>
+        <a href="https://www.linkedin.com/in/aleksandr-ostromogilskii-769315205/"><img src="./images/linkedin.svg"></img></a>
+    </footer>
 </body>
 </html>
+
 <script>
     const imageElem = document.getElementById('image')
     const titleElem = document.getElementById('title')
@@ -124,66 +132,14 @@
     getMovie()
 </script>
 <style>
-    p {
-        padding: 0;
-        margin: 0;
-    }
-    .wrapper {
-        margin-top: 4em;
+    main {
+        gap: 3em;
+        flex-grow: 1;
         display: flex;
         flex-direction: column;
-        
         justify-content: center;
         align-items: center;
     }
-    .card {
-        display: flex;
-        width: max-content;
-        display: flex;
-        flex-direction: column;
-    }
-    .card * {
-        border-radius: 1em;
-    }
-    .card__body {
-        padding: 5px;
-        display: flex;
-    }
-    .card__title{
-        text-align: center;
-        min-width: 100%;
-        margin-top: 10px;
-        height: 1.5em;
-        font-weight: 500;
-        font-size: 1.5em;
-        max-width: min-content;
-    }
-    .card__image {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        justify-content: center;
-    }
-    .card__image img{
-        object-fit: contain;
-        width: 300px;
-        height: 450px;
-    }
-    .skeleton {
-        background-position: 0% 100%;
-        background-size: 200% 200%;
-        background-image: linear-gradient(to right, hsl(200, 20%, 95%) 0%, hsl(200, 20%, 95%) 30%, hsl(200, 20%, 90%) 50%, hsl(200, 20%, 95%) 70%, hsl(200, 20%, 95%) 100%);
-        animation: skeleton-loading 2s ease infinite;
-    }
+    
 
-
-    @keyframes skeleton-loading {
-        0%{
-            background-position-x: 150%;
-        }
-        100% {
-            background-position: -50%;
-        }
-    }
 </style>
