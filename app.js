@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var helmet = require('helmet')
 var compression = require('compression')
+const cors = require('cors');
 require('dotenv').config()
 
 const apiRouter = require('./routes/api')
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression())
 app.use(helmet.contentSecurityPolicy());
+app.use(cors())
 
 app.use('/api', apiRouter)
 
