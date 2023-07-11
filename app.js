@@ -7,15 +7,10 @@ var helmet = require('helmet')
 var compression = require('compression')
 require('dotenv').config()
 
-var indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api')
 
 var app = express();
 
-// view engine setup
-app.engine('.html', require('ejs').__express);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,19 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression())
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      "default-src": ["'self'"],
-      "script-src": ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js", "https://www.googletagmanager.com", "https://mc.yandex.ru/metrika/tag.js"],
-      "connect-src": ["'self'", "https://moviesdatabase.p.rapidapi.com", "https://www.google-analytics.com", "https://mc.yandex.ru"],
-      "img-src": ["*"]
-    },
-  })
-);
+app.use(helmet.contentSecurityPolicy());
 
 app.use('/api', apiRouter)
-app.use('/', indexRouter);
 
 
 // catch 404 and forward to error handler
