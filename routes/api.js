@@ -1,8 +1,16 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 const axios = require('axios');
 
 router.get('/movie', function(req, res, next) {
+  let params = {
+    list: "most_pop_movies",
+    limit: 1,
+  }
+  if(req.query.genre){
+    params.genre = req.query.genre
+  }
+
   axios.get(process.env.DATA_URL,
     {
         headers:{
@@ -10,12 +18,8 @@ router.get('/movie', function(req, res, next) {
           'X-RapidAPI-Host': process.env.API_HOST,
           'Content-Type': 'application/json'
         },
-        params:{
-        list: "most_pop_movies",
-        limit: 1
-        }
-    }).then(async function (response){
-      
+        params
+    }).then(function (response){
         let movie = response.data.results[0]
         let image = movie.primaryImage ? movie.primaryImage.url : ''
         let title = movie.originalTitleText ? movie.originalTitleText.text : ''
